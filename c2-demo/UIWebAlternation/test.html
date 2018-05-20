@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+
+</head>
+<body>
+<div>
+这是本地网页:
+<input id="textinput"/>
+<button type="button" onclick="sendMsn()">确定</button>
+<button type="button" onclick="pushUI()">UI跳转</button>
+
+</div>
+
+    <script>
+  function sendMsn() {
+    if (C2WebViewBridge) {
+      var msn = document.getElementById("textinput").value;
+      C2WebViewBridge.send(msn);
+    }
+  }
+
+  function pushUI() {
+    if (C2WebViewBridge) {
+      C2WebViewBridge.send('pushUI');
+    }
+  }
+
+  if (C2WebViewBridge) {
+    C2WebViewBridge.onMessage = function (message) {
+      alert('网页弹出'+message);
+    };
+  }
+
+</script>
+</body>
+</html>
